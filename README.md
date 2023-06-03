@@ -51,14 +51,26 @@ You can:
 - Then rename the file to `appsetings.json`
 - Run the app (inside the project) with `dotnet run`
 - Wait until the browser open automatically, and notify you a message like that (in Altissia home page):
+
 ![Altissia home page](./docs/images/altissia_main_page.png)
+
 - Once you are there, please enter to an exam page, like this:
+
 ![Altissia home page](./docs/images/altissia_course_module.png)
+
 ![Altissia home page](./docs/images/altissia_exam_course.png)
+
 ![Altissia home page](./docs/images/altissia_course_start.png)
-- Go to the console where did you run the app, and put the `start` command. There are 2 commands: `start` to start an exam and `exit` to end the app.
+
+- Go to the console where did you run the app, and put the `start` command. 
+There are 2 commands: 
+  - `start` to start an exam 
+  - `exit` to end the app.
+
 ![Altissia home page](./docs/images/command_start.png)
+
 - And wait for it to finish and if you want, go to another course.
+
 ![Altissia home page](./docs/images/altissia_exam_ended.png)
 
 ## Room for Improvement
