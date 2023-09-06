@@ -4,7 +4,6 @@ using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.UI;
 
 using IdiomaExtranjeroAutomatedExams;
-using IdiomaExtranjeroAutomatedExams.Configuration;
 
 // Settings (json)
 IConfiguration appSettings = new ConfigurationBuilder()
@@ -12,15 +11,16 @@ IConfiguration appSettings = new ConfigurationBuilder()
     .Build();
 
 string? courseUrl = appSettings.GetSection("CourseUrl").Get<string>();
-Credentials? credentials = appSettings.GetSection("Credentials").Get<Credentials>();
 
-if (courseUrl is null || credentials is null)
+if (courseUrl is null)
 {
-    Console.WriteLine("Please, defined your credentials of ISIL and the course url in appsettings.json");
+    Console.WriteLine("Please, defined your course url in appsettings.json");
     return;
 }
 
-IWebDriver driver = new EdgeDriver();
+EdgeOptions options = new();
+options.AddArgument("--log-level=3"); // disable logging
+IWebDriver driver = new EdgeDriver(options);
 // Driver Settings 
 IOptions driverOptions = driver.Manage();
 driverOptions.Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
@@ -33,9 +33,17 @@ var utils = new Util(driver, wait);
 driver.Navigate().GoToUrl(courseUrl);
 
 // Login
-driver.FindElement(WebElements.ISIL.LOGIN_INPUT).SendKeys(credentials.Username);
-driver.FindElement(WebElements.ISIL.LOGIN_PASSWORD).SendKeys(credentials.Password);
-driver.FindElement(WebElements.ISIL.LOGIN_BTN).Click();
+utils.ShowAlert("Please, logged in and then put \"go\".");
+while(true){
+    Console.Clear();
+    Console.Write("Put command: ");
+    string? command = Console.ReadLine();
+    if(command?.ToLower() == "go")
+        break;
+    
+    if(command?.ToLower() == "exit")
+        return;
+}
 
 EnterToAltissia(true);
 
@@ -85,7 +93,14 @@ while (true)
     if(command.Trim().ToLower() == "start")
     {
         // Start exam
-        driver.FindElement(WebElements.Altissia.EXAM_START_BTN).Click();
+        try
+        {
+            driver.FindElement(WebElements.Altissia.EXAM_START_BTN).Click();
+        }
+        catch (NoSuchElementException)
+        {
+            continue;
+        }
 
         int numberOfQuestions = Convert.ToInt32(driver.FindElement(WebElements.Altissia.EXAM_QUESTION_NUMBER)
             .Text

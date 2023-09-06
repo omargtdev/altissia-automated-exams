@@ -16,6 +16,11 @@ namespace IdiomaExtranjeroAutomatedExams
             _jsExecutor = (IJavaScriptExecutor)_driver;
         }
 
+        public bool WaitForDocumentLoaded()
+        {
+            return _jsExecutor.ExecuteScript("return document.readyState").Equals("complete");
+        }
+
         public void ScrollToEnd()
         {
             _jsExecutor.ExecuteScript("window.scrollTo(0, document.body.scrollHeight);");
