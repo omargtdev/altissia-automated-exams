@@ -23,7 +23,6 @@ Well, this project was born in order to do the Altissia exams in an automated wa
 
 ## Features
 You can:
-- Process automated to login into platform
 - Make the exams do you one (I repet: **only exams**)
 
 ## Setup
@@ -41,16 +40,18 @@ You can:
 - You need to stablish the url of course and your credentials to be able to start in the file `appsettings.example.json`:
 ```json
 {
-  "CourseUrl": "<YOUR-URL-OF-IDIOMA-EXTRANJERO-COURSE>",
-  "Credentials": {
-    "Username": "<YOUR-DNI-OR-USERNAME-FROM-ISIL+>",
-    "Password": "<YOUR-PASSWORD-FROM-ISIL+>"
-  }
+  "CourseUrl": "<YOUR-URL-OF-IDIOMA-EXTRANJERO-COURSE>"
 }
 ```
 - Then rename the file to `appsetings.json`
 - Run the app (inside the project) with `dotnet run`
-- Wait until the browser open automatically, and notify you a message like that (in Altissia home page):
+- Wait until the browser open automatically, and notify you to log 
+in:
+
+![ISIL Login page](./docs/images/isil_login_page.png)
+
+- Then, you need to continue in the terminal with 'go' command.
+- After that, you need to wait to altissia main page.
 
 ![Altissia home page](./docs/images/altissia_main_page.png)
 
@@ -80,7 +81,7 @@ Also, when you put the `start` command, you must be in a exam start page otherwi
 
 To do:
 - [ ] Show an message to warn the process fails beacuse the internet is too low
-- [ ] Add validation to command `start`. When the user is not on a exam page, display an alert
+- [X] Add validation to command `start`. When the user is not on a exam page, display an alert
 - [ ] Add preference browser to select
 
 ## Contact
